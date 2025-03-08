@@ -18,17 +18,19 @@ interface WeatherData {
   visibility: number;
 }
 
+interface ForecastItem {
+  dt: number;
+  main: {
+    temp: number;
+    feels_like: number;
+    humidity: number;
+    pressure: number;
+  };
+  weather: { description: string; icon: string }[];
+}
+
 interface ForecastData {
-  list: {
-    dt: number;
-    main: {
-      temp: number;
-      feels_like: number;
-      humidity: number;
-      pressure: number;
-    };
-    weather: { description: string; icon: string }[];
-  }[];
+  list: ForecastItem[];
 }
 
 const Weather = () => {
@@ -95,10 +97,10 @@ const Weather = () => {
     new Date(timestamp * 1000).toLocaleTimeString();
 
   // Group the forecast data by day
-  const groupByDay = (data: any[]) => {
-    const groupedData: any[] = [];
+  const groupByDay = (data: ForecastItem[]) => {
+    const groupedData: ForecastItem[] = [];
     let currentDate: string | null = null;
-    let dailyData: any[] = [];
+    let dailyData: ForecastItem[] = [];
 
     data.forEach((item) => {
       const date = new Date(item.dt * 1000).toLocaleDateString();
@@ -125,28 +127,28 @@ const Weather = () => {
 
   return (
     <div className="w-full text-gray-800">
+      <div className="flex items-center max-w-[750px] mx-auto">
+        <input
+          type="text"
+          placeholder="Enter city name"
+          className="bg-gray-100 py-2.5 px-2 rounded-l-md w-full text-center text-lg outline-none"
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
+        />
+        <button
+          onClick={getWeather}
+          className="bg-gray-800 text-white rounded-r-md px-4 py-3 w-36"
+        >
+          {loading ? "Loading" : "Search"}
+        </button>
+      </div>
+      {error && (
+        <p className="text-red-500 mt-2 text-center bg-white rounded-md">
+          {error}
+        </p>
+      )}
       <div className="w-8/12 flex gap-10 mx-auto">
         <div className="mx-auto">
-          <div className="flex items-center max-w-[450px] mx-auto">
-            <input
-              type="text"
-              placeholder="Enter city name"
-              className="bg-gray-100 py-1.5 px-2 rounded-l-md w-full text-center text-lg outline-none"
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
-            />
-            <button
-              onClick={getWeather}
-              className="bg-gray-800 text-white rounded-r-md px-4 py-2 w-36"
-            >
-              {loading ? "Loading" : "Search"}
-            </button>
-          </div>
-          {error && (
-            <p className="text-red-500 mt-2 text-center bg-white rounded-md">
-              {error}
-            </p>
-          )}
           {weather && (
             <div className="mt-6 bg-white p-6 rounded-lg shadow-lg max-w-[380px] mx-auto">
               <h2 className="text-4xl font-bold">
@@ -215,15 +217,17 @@ const Weather = () => {
         <div className="flex-auto">
           {forecast && (
             <div className="mt-6 bg-white p-6 rounded-lg max-w-xs shadow-lg mx-auto">
-              <h2 className="text-2xl font-bold flex">Todays Forecast</h2>
+              <h2 className="text-2xl font-bold flex">Today's Forecast</h2>
               {forecast.list.slice(0, 7).map((item, index) => (
                 <div
                   key={index}
-                  className="mt-4 flex items-center justify-between"
+                  className="flex items-center justify-between"
                 >
-                  <p className="grid-cols-1 text-lg font-semibold">
-                    {new Date(item.dt * 1000).toLocaleDateString()}
-                  </p>
+                  <div>
+                    <p className="text-sm font-light">
+                      {format(new Date(item.dt * 1000), "hh a")}{" "}
+                    </p>
+                  </div>
                   <Image
                     src={`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`}
                     alt="Weather"
