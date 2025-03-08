@@ -2,17 +2,17 @@
 
 #### A simple weather application built with Next.js and TypeScript that fetches weather data using the OpenWeatherMap API.
 
-## 🚀 Features
+## Features
 - Search weather by city name 🌍
 - Display current temperature 🌡
 - Show weather conditions ☁️
 - Responsive UI 📱
 
-## 🛠️ Tech Stack
+## Tech Stack
 - **Frontend:** React (Next.js), TypeScript, TailwindCSS
 - **API:** OpenWeatherMap API
 
-## 📜 Getting Started
+## Getting Started
 Follow the steps below to set up and run the project locally.
 
 ### 1️⃣ Clone the Repository
@@ -64,5 +64,5 @@ Make sure:
 - Restart the development server.
 - Ensure the OpenWeatherMap API key is valid and activated.
 
-## 📌 License
+## License
 This project is open-source and available under the MIT License.
