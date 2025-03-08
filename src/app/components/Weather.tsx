@@ -5,10 +5,16 @@ import { useState } from "react";
 
 interface WeatherData {
   name: string;
-  sys: { country: string };
+  sys: { country: string; sunrise: number; sunset: number };
   weather: { description: string; icon: string }[];
-  main: { temp: number; humidity: number };
+  main: {
+    temp: number;
+    feels_like: number;
+    humidity: number;
+    pressure: number;
+  };
   wind: { speed: number };
+  visibility: number;
 }
 
 const Weather = () => {
@@ -35,40 +41,57 @@ const Weather = () => {
     }
   };
 
+  const formatTime = (timestamp: number) => {
+    return new Date(timestamp * 1000).toLocaleTimeString();
+  };
+
   return (
-    <div className="flex flex-col items-center p-6 bg-gray-100 min-h-screen">
-      <h1 className="text-3xl font-bold mb-4">Weather App</h1>
-      <input
-        type="text"
-        placeholder="Enter city name"
-        className="border p-2 rounded-md w-64 text-center"
-        value={city}
-        onChange={(e) => setCity(e.target.value)}
-      />
-      <button
-        onClick={getWeather}
-        className="bg-blue-500 text-white px-4 py-2 mt-2 rounded-md"
-      >
-        {loading ? "Loading..." : "Get Weather"}
-      </button>
-      {error && <p className="text-red-500 mt-2">{error}</p>}
+    <div className="max-w-lg mx-auto text-gray-800">
+      <div className="flex items-center w-full">
+        <input
+          type="text"
+          placeholder="Enter city name"
+          className="bg-gray-100 p-2 rounded-l-md w-full text-center border-none outline-none text-lg"
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
+        />
+        <button
+          onClick={getWeather}
+          className="bg-gray-800 text-white rounded-r-md px-4 py-2 text-lg"
+        >
+          {loading ? "Loading..." : "Search"}
+        </button>
+      </div>
+      {error && <p className="text-red-500 mt-2 text-center">{error}</p>}
       {weather && (
-        <div className="mt-4 bg-white p-6 rounded-lg shadow-lg text-center">
-          <h2 className="text-xl font-bold">
+        <div className="mt-6 bg-white p-6 rounded-lg shadow-lg max-w-md mx-auto">
+          <h2 className="text-2xl font-bold text-center">
             {weather.name}, {weather.sys.country}
           </h2>
-          <Image
-            src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
-            alt="Weather Icon"
-            width={100}
-            height={100}
-            priority
-          />
+          <div className="flex items-center justify-center mt-3 space-x-4">
+            <p className="text-4xl md:text-5xl font-bold">{weather.main.temp}°C</p>
+            <Image
+              src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
+              alt="Weather Icon"
+              width={100}
+              height={100}
+              priority
+            />
+          </div>
 
-          <p>{weather.weather[0].description}</p>
-          <p className="text-lg font-bold">{weather.main.temp}°C</p>
-          <p>Humidity: {weather.main.humidity}%</p>
-          <p>Wind Speed: {weather.wind.speed} m/s</p>
+          <p className="capitalize text-lg text-gray-600">
+            {weather.weather[0].description}
+          </p>
+
+          <div className="grid grid-cols-2 gap-4 mt-4 text-gray-700">
+            <p className="text-base md:text-lg">Feels Like: <span className="font-semibold">{weather.main.feels_like}°C</span></p>
+            <p className="text-base md:text-lg">Humidity: <span className="font-semibold">{weather.main.humidity}%</span></p>
+            <p className="text-base md:text-lg">Wind Speed: <span className="font-semibold">{weather.wind.speed} m/s</span></p>
+            <p className="text-base md:text-lg">Pressure: <span className="font-semibold">{weather.main.pressure} hPa</span></p>
+            <p className="text-base md:text-lg">Visibility: <span className="font-semibold">{weather.visibility / 1000} km</span></p>
+            <p className="text-base md:text-lg">Sunrise: <span className="font-semibold">{formatTime(weather.sys.sunrise)}</span></p>
+            <p className="text-base md:text-lg">Sunset: <span className="font-semibold">{formatTime(weather.sys.sunset)}</span></p>
+          </div>
         </div>
       )}
     </div>
