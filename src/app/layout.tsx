@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "SkyCast Weather App",
+  title: "Skycast Weather App",
   description: "Check live weather updates from anywhere in the world",
   icons: "/icon.webp",
 };

@@ -15,6 +15,16 @@
 - **Frontend:** React (Next.js), TypeScript, TailwindCSS
 - **API:** OpenWeatherMap API
 
+## Dependencies
+
+    "dependencies": {
+        "axios": "^1.8.2",
+        "date-fns": "^4.1.0",
+        "next": "15.2.1",
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0"
+    },
+
 ## Getting Started
 
 Follow the steps below to set up and run the project locally.
