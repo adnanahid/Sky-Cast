@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface WeatherData {
   name: string;
@@ -21,6 +21,35 @@ const Weather = () => {
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const getLocationWeather = async () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(async (position) => {
+          const { latitude, longitude } = position.coords;
+          setError("");
+          setLoading(true);
+          try {
+            const res = await fetch(
+              `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}&units=metric`
+            );
+            if (!res.ok) throw new Error("Location not found");
+            const data: WeatherData = await res.json();
+            setWeather(data);
+            console.log(data);
+          } catch {
+            setError("Could not fetch weather data. Please try again.");
+          } finally {
+            setLoading(false);
+          }
+        });
+      } else {
+        setError("Geolocation not supported by this browser.");
+      }
+    };
+
+    getLocationWeather();
+  }, []);
 
   const getWeather = async () => {
     setError("");
@@ -56,7 +85,7 @@ const Weather = () => {
         />
         <button
           onClick={getWeather}
-          className=" bg-gray-800 text-white rounded-r-md px-4 py-2 text-lg border-none outline-none w-36"
+          className="bg-gray-800 text-white rounded-r-md px-4 py-2 text-lg border-none outline-none w-36"
         >
           {loading ? "Loading..." : "Search"}
         </button>
