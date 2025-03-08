@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌦 Sky Cast
 
-## Getting Started
+#### A simple weather application built with Next.js and TypeScript that fetches weather data using the OpenWeatherMap API.
 
-First, run the development server:
+## 🚀 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Search weather by city name 🌍
+- Display current temperature 🌡
+- Show weather conditions ☁️
+- Responsive UI 📱
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Frontend:** React (Next.js), TypeScript, TailwindCSS
+- **API:** OpenWeatherMap API
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📜 **Getting Started**
 
-## Learn More
+Follow the steps below to set up and run the project locally.
 
-To learn more about Next.js, take a look at the following resources:
+### **1️⃣ Clone the Repository**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+    git clone https://github.com/yourusername/weather-app.git
+    cd weather-app
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### **2️⃣Install Dependencies**
 
-## Deploy on Vercel
+    npm install
+    # or
+    yarn install
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### **3️⃣Set Up Environment Variables**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+    NEXT_PUBLIC_WEATHER_API_KEY=your_openweathermap_api_key
+
+### **4️⃣ Run the Development Server**
+
+    npm run dev
+    # or
+    yarn dev
+
+## 📌 API Integration
+
+This project uses the OpenWeatherMap API to fetch real-time weather data.
+
+## 🔗 API Endpoint Used
+
+    https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric
+
+- Replace {city} with the user's search query.
+- Replace {API_KEY} with your OpenWeatherMap API key.
+
+# ❓ Troubleshooting
+
+## TailwindCSS Not Working?
+
+Make sure:
+
+- globals.css is imported in layout.tsx or \_app.tsx.
+- Tailwind content paths are correctly set in tailwind.config.ts.
+- Restart the Next.js server after changes.
+
+## API Not Working?
+
+- Check if your API key is correctly set in .env.local.
+- Restart the development server.
+- Ensure the OpenWeatherMap API key is valid and activated.
+
+# 📌 License
+
+This project is open-source and available under the MIT License.
