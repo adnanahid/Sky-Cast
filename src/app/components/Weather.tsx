@@ -22,6 +22,7 @@ const Weather = () => {
       if (!res.ok) throw new Error("City not found");
       const data: WeatherData = await res.json();
       setWeather(data);
+      console.log(data);
     } catch {
       setError("City not found. Please try again.");
     }
@@ -38,7 +39,7 @@ const Weather = () => {
       />
       <button
         onClick={getWeather}
-        className="bg-blue-500 text-white px-4 py-2 mt-2 rounded-md"
+        className="bg-blue-500 text-white px-4 py-2 mt-2 rounded-md text-5xl"
       >
         Get Weather
       </button>
