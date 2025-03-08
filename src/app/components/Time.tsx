@@ -5,6 +5,7 @@ import { format } from "date-fns";
 export default function Time() {
   const [currentDate, setCurrentDate] = useState<string>("");
   const [currentTime, setCurrentTime] = useState<string>("");
+
   useEffect(() => {
     const updateDateTime = () => {
       const now = new Date();
@@ -17,6 +18,7 @@ export default function Time() {
 
     return () => clearInterval(interval);
   }, []);
+  
   return (
     <div>
       <h1 className="text-3xl sm:text-6xl tracking-widest text-gray-800">

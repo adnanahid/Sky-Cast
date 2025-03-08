@@ -20,8 +20,8 @@ Follow the steps below to set up and run the project locally.
 
 ### **1️⃣ Clone the Repository**
 
-    git clone https://github.com/yourusername/weather-app.git
-    cd weather-app
+    git clone https://github.com/adnanahid/Sky-Cast.git
+    cd sky_cast
 
 ### **2️⃣Install Dependencies**
 
