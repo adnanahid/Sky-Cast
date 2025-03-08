@@ -3,10 +3,11 @@
 #### A simple weather application built with Next.js and TypeScript that fetches weather data using the OpenWeatherMap API.
 
 ## Features
-- Search weather by city name 🌍
-- Display current temperature 🌡
-- Show weather conditions ☁️
-- Responsive UI 📱
+- Show weather for the user's current location by default: Upon loading the app, the weather for the user's current location is displayed automatically.
+- Search weather by city name: Allows users to search for weather in any city by typing the name in the search bar.
+- Display current temperature: Shows the current temperature in Celsius for the selected city or user's location.
+- Show weather conditions: Displays detailed weather conditions like clouds, wind, humidity, etc.
+- Responsive UI: The application is designed to work seamlessly across both desktop and mobile devices using TailwindCSS.
 
 ## Tech Stack
 - **Frontend:** React (Next.js), TypeScript, TailwindCSS
