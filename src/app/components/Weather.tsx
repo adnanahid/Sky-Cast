@@ -57,7 +57,7 @@ const Weather = () => {
         />
         <button
           onClick={getWeather}
-          className="bg-gray-800 text-white rounded-r-md px-4 py-2 text-lg"
+          className=" bg-gray-800 text-white rounded-r-md px-4 py-2 text-lg border-none outline-none w-36"
         >
           {loading ? "Loading..." : "Search"}
         </button>
