@@ -1,5 +1,4 @@
 "use client";
-
 import Image from "next/image";
 import { useState } from "react";
 
@@ -64,12 +63,14 @@ const Weather = () => {
       </div>
       {error && <p className="text-red-500 mt-2 text-center">{error}</p>}
       {weather && (
-        <div className="mt-6 bg-white p-6 rounded-lg shadow-lg max-w-md mx-auto">
-          <h2 className="text-2xl font-bold text-center">
+        <div className="mt-6 bg-white p-6 rounded-lg shadow-lg max-w-[380px] mx-auto">
+          <h2 className="text-4xl font-bold">
             {weather.name}, {weather.sys.country}
           </h2>
-          <div className="flex items-center justify-center mt-3 space-x-4">
-            <p className="text-4xl md:text-5xl font-bold">{weather.main.temp}°C</p>
+          <div className="flex items-center justify-between mt-3 space-x-4">
+            <p className="text-2xl md:text-3xl font-bold">
+              {weather.main.temp}°C
+            </p>
             <Image
               src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
               alt="Weather Icon"
@@ -84,13 +85,40 @@ const Weather = () => {
           </p>
 
           <div className="grid grid-cols-2 gap-4 mt-4 text-gray-700">
-            <p className="text-base md:text-lg">Feels Like: <span className="font-semibold">{weather.main.feels_like}°C</span></p>
-            <p className="text-base md:text-lg">Humidity: <span className="font-semibold">{weather.main.humidity}%</span></p>
-            <p className="text-base md:text-lg">Wind Speed: <span className="font-semibold">{weather.wind.speed} m/s</span></p>
-            <p className="text-base md:text-lg">Pressure: <span className="font-semibold">{weather.main.pressure} hPa</span></p>
-            <p className="text-base md:text-lg">Visibility: <span className="font-semibold">{weather.visibility / 1000} km</span></p>
-            <p className="text-base md:text-lg">Sunrise: <span className="font-semibold">{formatTime(weather.sys.sunrise)}</span></p>
-            <p className="text-base md:text-lg">Sunset: <span className="font-semibold">{formatTime(weather.sys.sunset)}</span></p>
+            <p className="text-sm md:text-base">
+              Feels Like:{" "}
+              <span className="font-semibold">{weather.main.feels_like}°C</span>
+            </p>
+            <p className="text-sm md:text-base">
+              Humidity:{" "}
+              <span className="font-semibold">{weather.main.humidity}%</span>
+            </p>
+            <p className="text-sm md:text-base">
+              Wind Speed:{" "}
+              <span className="font-semibold">{weather.wind.speed} m/s</span>
+            </p>
+            <p className="text-sm md:text-base">
+              Pressure:{" "}
+              <span className="font-semibold">{weather.main.pressure} hPa</span>
+            </p>
+            <p className="text-sm md:text-base">
+              Visibility:{" "}
+              <span className="font-semibold">
+                {weather.visibility / 1000} km
+              </span>
+            </p>
+            <p className="text-sm md:text-base">
+              Sunrise:{" "}
+              <span className="font-semibold">
+                {formatTime(weather.sys.sunrise)}
+              </span>
+            </p>
+            <p className="text-sm md:text-base">
+              Sunset:{" "}
+              <span className="font-semibold">
+                {formatTime(weather.sys.sunset)}
+              </span>
+            </p>
           </div>
         </div>
       )}
