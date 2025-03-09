@@ -66,7 +66,17 @@ This project uses the OpenWeatherMap API to fetch real-time weather data.
 
 ## Design Choice
 
-I just love to make simple and clean application so i keep my ui fully clean and simple. this is mainly a one page app so in home page at top i placed a app logo in left and time in right. Then come weather component and this components top i keep a search bar. then i keep some information card that can be informative for user. I create 3 card to show forecast. One is Current weather update and right i keep a card where use can see next 3 hours and bottom there is a card for  The decision to use OpenWeatherMap was based on its reliability and ease of integration with real-time weather data. The API provides accurate and up-to-date information that is critical for any weather application. Additionally, the option to get data in Celsius makes it more suitable for global users, as it’s widely used in most parts of the world.
+I love creating simple and clean applications, so I focus on keeping the UI minimal and clutter-free. This is primarily a one-page app, where the home page layout is designed for easy access to essential information.
+
+At the top, I placed the app logo on the left and the current time on the right. Below that, the weather component takes center stage, featuring a search bar at the top for quick location-based queries.
+
+To provide users with insightful weather details, I designed three informative cards:
+
+- Current Weather Update – Displays real-time weather conditions.
+- Next 3-Hour Forecast – Positioned to the right, offering a short-term weather outlook.
+- Extended Forecast – Located at the bottom, providing additional weather insights.
+
+For real-time and accurate weather data, I chose OpenWeatherMap due to its reliability and ease of integration. The API delivers up-to-date information, which is crucial for any weather application. Additionally, its support for Celsius makes it user-friendly for a global audience, as Celsius is widely used in most parts of the world.
 
 ## Troubleshooting
 
