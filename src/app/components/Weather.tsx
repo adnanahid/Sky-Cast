@@ -16,6 +16,7 @@ interface WeatherData {
   };
   wind: { speed: number };
   visibility: number;
+  clouds: { all: number };
 }
 
 interface ForecastItem {
@@ -107,9 +108,9 @@ const Weather = () => {
 
       if (date !== currentDate) {
         if (dailyData.length > 0) {
-          groupedData.push(dailyData[0]); // Add the first weather item of the day
+          groupedData.push(dailyData[0]);
         }
-        dailyData = [item]; // Start a new day
+        dailyData = [item];
         currentDate = date;
       } else {
         dailyData.push(item);
@@ -117,13 +118,13 @@ const Weather = () => {
     });
 
     if (dailyData.length > 0) {
-      groupedData.push(dailyData[0]); // Add the last day's data
+      groupedData.push(dailyData[0]);
     }
 
     return groupedData;
   };
 
-  const fiveDayForecast = forecast ? groupByDay(forecast.list).slice(0, 7) : [];
+  const fiveDayForecast = forecast ? groupByDay(forecast.list).slice(0, 5) : [];
 
   return (
     <div className="w-full text-gray-800">
@@ -131,13 +132,13 @@ const Weather = () => {
         <input
           type="text"
           placeholder="Enter city name"
-          className="bg-gray-100 py-2.5 px-2 rounded-l-md w-full text-center text-lg outline-none"
+          className="bg-gray-100 py-1 md:py-2.5 px-2 rounded-l-md w-full text-center text-lg outline-none"
           value={city}
           onChange={(e) => setCity(e.target.value)}
         />
         <button
           onClick={getWeather}
-          className="bg-gray-800 text-white rounded-r-md px-4 py-3 w-36"
+          className="bg-gray-800 text-white rounded-r-md px-4 py-1.5 md:py-3 w-36"
         >
           {loading ? "Loading" : "Search"}
         </button>
@@ -147,8 +148,8 @@ const Weather = () => {
           {error}
         </p>
       )}
-      <div className="w-8/12 flex gap-10 mx-auto">
-        <div className="mx-auto">
+      <div className="max-w-[800px] flex flex-col md:flex-row mx-auto gap-6">
+        <div className="w-full md:w-1/2 mx-auto">
           {weather && (
             <div className="mt-6 bg-white p-6 rounded-lg shadow-lg max-w-[380px] mx-auto">
               <h2 className="text-4xl font-bold">
@@ -210,30 +211,30 @@ const Weather = () => {
                     {formatTime(weather.sys.sunset)}
                   </span>
                 </p>
+                <p className="text-sm">
+                  Cloud Cover:{" "}
+                  <span className="font-semibold">{weather.clouds.all}%</span>
+                </p>
               </div>
             </div>
           )}
         </div>
-        <div className="flex-auto">
+        <div className="w-full md:w-1/3 mx-auto mb-6">
           {forecast && (
-            <div className="mt-6 bg-white p-6 rounded-lg max-w-xs shadow-lg mx-auto">
-              <h2 className="text-2xl font-bold flex">Today's Forecast</h2>
+            <div className="mt-6 bg-white p-6 rounded-lg max-w-[250px] shadow-lg mx-auto">
+              <h2 className="text-2xl font-bold flex mb-5">
+                Today{"'"}s Forecast
+              </h2>
               {forecast.list.slice(0, 7).map((item, index) => (
                 <div
                   key={index}
-                  className="flex items-center justify-between"
+                  className="flex items-center justify-between mb-2.5"
                 >
                   <div>
                     <p className="text-sm font-light">
                       {format(new Date(item.dt * 1000), "hh a")}{" "}
                     </p>
                   </div>
-                  <Image
-                    src={`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`}
-                    alt="Weather"
-                    width={50}
-                    height={50}
-                  />
                   <p className="text-lg font-semibold">{item.main.temp}°C</p>
                 </div>
               ))}
@@ -243,25 +244,24 @@ const Weather = () => {
       </div>
 
       {fiveDayForecast.length > 0 && (
-        <div className="w-7/12 mt-6 bg-white p-6 rounded-lg shadow-lg mx-auto">
+        <div className="sm:max-w-8/12 mt-6 bg-white p-6 rounded-lg shadow-lg mx-auto text-center">
           <h2 className="text-2xl font-bold">5-Day Forecast</h2>
-          <div className="flex gap-10 mx-auto">
+          <div className="grid overflow-auto grid-cols-5 gap-10 mx-auto">
             {fiveDayForecast.map((item, index) => {
-              const date = new Date(item.dt * 1000); // Convert timestamp to Date object
-              const formattedDate = format(date, "EEEE, dd"); // Format as "Thursday, 13"
-
+              const date = new Date(item.dt * 1000);
+              const formattedDate = format(date, "EEEE, dd");
+              const day = formattedDate.split(" ")[0].slice(0, 3);
+              const date2 = formattedDate.split(" ")[1];
               return (
                 <div
                   key={index}
-                  className="mt-4 flex flex-col items-center justify-between"
+                  className="mt-4 flex flex-col items-center justify-between w-[100px] mx-auto space-x-3"
                 >
-                  <p className="text-lg font-semibold">{formattedDate}</p>
-                  <Image
-                    src={`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`}
-                    alt="Weather"
-                    width={50}
-                    height={50}
-                  />
+                  <p className="text-sm font-semibold">
+                    {day}
+                    {", "}
+                    {date2}
+                  </p>
                   <p className="text-lg font-semibold">{item.main.temp}°C</p>
                 </div>
               );
