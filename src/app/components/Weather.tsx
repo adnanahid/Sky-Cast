@@ -112,26 +112,26 @@ const Weather = () => {
         <input
           type="text"
           placeholder="Enter city name"
-          className="bg-gray-100 py-1 md:py-2.5 px-2 rounded-l-md w-full text-center text-lg outline-none"
+          className="bg-[#161616] text-white py-1 md:py-2.5 px-2 rounded-l-md w-full text-center text-lg outline-none"
           value={city}
           onChange={(e) => setCity(e.target.value)}
         />
         <button
           onClick={getWeather}
-          className="btn bg-gray-800 hover:bg-gray-600 text-white rounded-r-md px-4 py-1.5 md:py-3 text-2xl"
+          className="btn bg-white hover:bg-gray-600 text-black rounded-r-md px-4 py-1.5 md:py-3 text-2xl"
         >
           <FaSearchengin />
         </button>
       </div>
       {error && (
-        <p className="text-red-500 mt-2 text-center bg-white rounded-md max-w-sm mx-auto">
+        <p className="text-red-500 mt-2 text-center rounded-md max-w-sm mx-auto">
           {error}
         </p>
       )}
       <div className="max-w-[800px] flex flex-col md:flex-row mx-auto gap-6">
         <div className="w-full md:w-1/2 mx-auto">
           {weather && (
-            <div className="mt-6 bg-white p-6 rounded-lg shadow-lg max-w-[380px] mx-auto">
+            <div className="mt-6 bg-[#161616] text-white p-6 rounded-lg shadow-lg max-w-[380px] mx-auto">
               <h2 className="text-4xl font-bold">
                 {weather.name}, {weather.sys.country}
               </h2>
@@ -145,10 +145,10 @@ const Weather = () => {
                   priority
                 />
               </div>
-              <p className="capitalize text-lg text-gray-600">
+              <p className="capitalize text-lg">
                 {weather.weather[0].description}
               </p>
-              <div className="grid grid-cols-2 gap-4 mt-4 text-gray-700">
+              <div className="grid grid-cols-2 gap-4 mt-4">
                 <p className="text-sm">
                   Feels Like:{" "}
                   <span className="font-semibold">
@@ -201,7 +201,7 @@ const Weather = () => {
         </div>
         <div className="w-full md:w-1/3 mx-auto mb-6">
           {forecast && (
-            <div className="mt-6 bg-white p-6 rounded-lg max-w-[250px] shadow-lg mx-auto">
+            <div className="mt-6 bg-[#161616] text-white p-6 rounded-lg max-w-[250px] shadow-lg mx-auto">
               <h2 className="text-2xl font-bold flex mb-5">
                 Today{"'"}s Forecast
               </h2>
@@ -224,7 +224,7 @@ const Weather = () => {
       </div>
 
       {fiveDayForecast.length > 0 && (
-        <div className="sm:max-w-10/12 lg:max-w-8/12 mt-6 bg-white p-6 rounded-lg shadow-lg mx-auto text-center">
+        <div className="sm:max-w-10/12 lg:max-w-8/12 mt-6 bg-[#161616] text-white p-6 rounded-lg shadow-lg mx-auto text-center">
           <h2 className="text-2xl font-bold mb-3">5-Day Forecast</h2>
           <div className="grid overflow-auto grid-cols-5 gap-20 md:gap-10 mx-auto">
             {fiveDayForecast.map((item, index) => {

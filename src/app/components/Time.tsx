@@ -23,11 +23,11 @@ export default function Time() {
 
   return (
     <div>
-      <h1 className="text-4xl sm:text-6xl tracking-widest text-gray-800">
+      <h1 className="text-4xl sm:text-6xl tracking-widest text-white">
         {time}
         <span className="text-xl">{amPm}</span>
       </h1>
-      <p className="text-lg sm:text-xl sm:mt-2 text-gray-700">{currentDate}</p>
+      <p className="text-lg sm:text-xl sm:mt-2 text-white">{currentDate}</p>
     </div>
   );
 }
