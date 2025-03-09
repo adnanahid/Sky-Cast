@@ -2,6 +2,9 @@
 
 #### A simple weather application built with Next.js and TypeScript that fetches weather data using the OpenWeatherMap API.
 
+## Live Link:
+https://sky-cast-peach.vercel.app/
+
 ## Features
 
 - **Show weather for the user's current location by default:** Upon loading the app, the weather for the user's current location is displayed automatically.
