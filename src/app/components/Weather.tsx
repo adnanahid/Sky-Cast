@@ -118,7 +118,7 @@ const Weather = () => {
         <input
           type="text"
           placeholder="Enter city name"
-          className="bg-[#161616] text-white py-1 md:py-2.5 px-2 rounded-l-md w-full text-center text-lg outline-none"
+          className="z-20 bg-[#161616] text-white py-1 md:py-2.5 px-2 rounded-l-md w-full text-center text-lg outline-none"
           value={city}
           onChange={(e) => setCity(e.target.value)}
           onKeyDown={handleKeyPress}
