@@ -88,6 +88,12 @@ const Weather = () => {
     }
   };
 
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      getWeather();
+    }
+  };
+
   const formatTime = (timestamp: number) =>
     new Date(timestamp * 1000).toLocaleTimeString();
 
@@ -115,6 +121,7 @@ const Weather = () => {
           className="bg-[#161616] text-white py-1 md:py-2.5 px-2 rounded-l-md w-full text-center text-lg outline-none"
           value={city}
           onChange={(e) => setCity(e.target.value)}
+          onKeyDown={handleKeyPress}
         />
         <button
           onClick={getWeather}
