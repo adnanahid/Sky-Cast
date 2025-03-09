@@ -14,10 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className="antialiased container mx-auto bg-cover bg-center min-h-screen bg-[#101010] text-white"
-        // style={{ backgroundImage: "url('/weatherbg.jpg')" }}
-      >
+      <body className="antialiased container mx-auto bg-cover bg-center min-h-screen bg-[#101010] text-white">
         {children}
       </body>
     </html>

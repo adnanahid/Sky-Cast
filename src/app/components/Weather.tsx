@@ -114,6 +114,7 @@ const Weather = () => {
 
   return (
     <div className="w-full text-gray-800">
+      {/* search field */}
       <div className="flex items-center max-w-[750px] mx-auto">
         <input
           type="text"
@@ -130,11 +131,15 @@ const Weather = () => {
           <FaSearchengin />
         </button>
       </div>
+
+      {/* error message */}
       {error && (
         <p className="text-red-500 mt-2 text-center rounded-md max-w-sm mx-auto">
           {error}
         </p>
       )}
+
+      {/* todays forecast */}
       <div className="max-w-[800px] flex flex-col md:flex-row mx-auto gap-6">
         <div className="w-full md:w-1/2 mx-auto">
           {weather && (
@@ -230,6 +235,7 @@ const Weather = () => {
         </div>
       </div>
 
+      {/* next few days forecast */}
       {fiveDayForecast.length > 0 && (
         <div className="sm:max-w-10/12 lg:max-w-8/12 mt-6 bg-[#161616] text-white p-6 rounded-lg shadow-lg mx-auto text-center">
           <h2 className="text-2xl font-bold mb-3">5-Day Forecast</h2>
