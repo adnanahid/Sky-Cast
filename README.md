@@ -32,15 +32,15 @@ Follow the steps below to set up and run the project locally.
 ### 1️⃣ Clone the Repository
 
     git clone https://github.com/adnanahid/Sky-Cast.git
-    cd Sky_Cast
+    cd Sky-Cast
 
 ### 2️⃣Install Dependencies
-
     npm install
     # or
     yarn install
 
 ### 3️⃣Set Up Environment Variables
+create .env.local file then past following Environment Variables and replace with your api from openweathermap
 
     NEXT_PUBLIC_WEATHER_API_KEY=your_openweathermap_api_key
 
