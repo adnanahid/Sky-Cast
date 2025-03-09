@@ -3,6 +3,7 @@ import axios from "axios";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { format } from "date-fns";
+import { FaSearchengin } from "react-icons/fa";
 
 interface WeatherData {
   name: string;
@@ -39,31 +40,24 @@ const Weather = () => {
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [forecast, setForecast] = useState<ForecastData | null>(null);
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
 
   const handleWeather = async (url: string) => {
-    setLoading(true);
     setError("");
     try {
       const { data } = await axios.get(url);
       setWeather(data);
     } catch {
       setError("Could not fetch weather data. Please try again.");
-    } finally {
-      setLoading(false);
     }
   };
 
   const handleForecast = async (url: string) => {
-    setLoading(true);
     setError("");
     try {
       const { data } = await axios.get(url);
       setForecast(data);
     } catch {
       setError("Could not fetch forecast data. Please try again.");
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -97,31 +91,17 @@ const Weather = () => {
   const formatTime = (timestamp: number) =>
     new Date(timestamp * 1000).toLocaleTimeString();
 
-  // Group the forecast data by day
   const groupByDay = (data: ForecastItem[]) => {
-    const groupedData: ForecastItem[] = [];
-    let currentDate: string | null = null;
-    let dailyData: ForecastItem[] = [];
+    const uniqueDays = new Map();
 
     data.forEach((item) => {
       const date = new Date(item.dt * 1000).toLocaleDateString();
-
-      if (date !== currentDate) {
-        if (dailyData.length > 0) {
-          groupedData.push(dailyData[0]);
-        }
-        dailyData = [item];
-        currentDate = date;
-      } else {
-        dailyData.push(item);
+      if (!uniqueDays.has(date)) {
+        uniqueDays.set(date, item);
       }
     });
 
-    if (dailyData.length > 0) {
-      groupedData.push(dailyData[0]);
-    }
-
-    return groupedData;
+    return Array.from(uniqueDays.values());
   };
 
   const fiveDayForecast = forecast ? groupByDay(forecast.list).slice(0, 5) : [];
@@ -138,13 +118,13 @@ const Weather = () => {
         />
         <button
           onClick={getWeather}
-          className="bg-gray-800 text-white rounded-r-md px-4 py-1.5 md:py-3 w-36"
+          className="btn bg-gray-800 hover:bg-gray-600 text-white rounded-r-md px-4 py-1.5 md:py-3 text-2xl"
         >
-          {loading ? "Loading" : "Search"}
+          <FaSearchengin />
         </button>
       </div>
       {error && (
-        <p className="text-red-500 mt-2 text-center bg-white rounded-md">
+        <p className="text-red-500 mt-2 text-center bg-white rounded-md max-w-sm mx-auto">
           {error}
         </p>
       )}
@@ -244,9 +224,9 @@ const Weather = () => {
       </div>
 
       {fiveDayForecast.length > 0 && (
-        <div className="sm:max-w-8/12 mt-6 bg-white p-6 rounded-lg shadow-lg mx-auto text-center">
-          <h2 className="text-2xl font-bold">5-Day Forecast</h2>
-          <div className="grid overflow-auto grid-cols-5 gap-10 mx-auto">
+        <div className="sm:max-w-10/12 lg:max-w-8/12 mt-6 bg-white p-6 rounded-lg shadow-lg mx-auto text-center">
+          <h2 className="text-2xl font-bold mb-3">5-Day Forecast</h2>
+          <div className="grid overflow-auto grid-cols-5 gap-20 md:gap-10 mx-auto">
             {fiveDayForecast.map((item, index) => {
               const date = new Date(item.dt * 1000);
               const formattedDate = format(date, "EEEE, dd");
