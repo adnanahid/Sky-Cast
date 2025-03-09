@@ -110,7 +110,7 @@ const Weather = () => {
     return Array.from(uniqueDays.values());
   };
 
-  const fiveDayForecast = forecast ? groupByDay(forecast.list).slice(0, 5) : [];
+  const fiveDayForecast = forecast ? groupByDay(forecast.list).slice(1, 6) : [];
 
   return (
     <div className="w-full text-gray-800">
@@ -237,8 +237,8 @@ const Weather = () => {
 
       {/* next few days forecast */}
       {fiveDayForecast.length > 0 && (
-        <div className="sm:max-w-10/12 lg:max-w-8/12 mt-6 bg-[#161616] text-white p-6 rounded-lg shadow-lg mx-auto text-center">
-          <h2 className="text-2xl font-bold mb-3">5-Day Forecast</h2>
+        <div className="sm:max-w-11/12 lg:max-w-8/12 mt-6 bg-[#161616] text-white p-6 rounded-lg shadow-lg mx-auto text-center">
+          <h2 className="text-2xl font-bold mb-3">Next 5-Day Forecast</h2>
           <div className="grid overflow-auto grid-cols-5 gap-20 md:gap-10 mx-auto">
             {fiveDayForecast.map((item, index) => {
               const date = new Date(item.dt * 1000);
@@ -248,7 +248,7 @@ const Weather = () => {
               return (
                 <div
                   key={index}
-                  className="mt-4 flex flex-col items-center justify-between w-[100px] mx-auto space-x-3"
+                  className="mt-4 flex flex-col items-center justify-between w-[70px] mx-auto space-x-3"
                 >
                   <p className="text-sm font-semibold">
                     {day}
